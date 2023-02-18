@@ -35,7 +35,7 @@ RSpec.describe 'Astronaut index page', type: :feature do
         astronaut_3 = Astronaut.create!(name: 'Neil Legstrong', age: 40, job: 'Aging Space Pirate')
 
         visit '/astronauts'
-        # save_and_open_page
+
         expect(page).to have_content("Average Age: 62.33")
       end
 
@@ -49,7 +49,7 @@ RSpec.describe 'Astronaut index page', type: :feature do
         end
       end
 
-      it 'shows a list of all of an astronauts mission names in alphabetical order' do
+      it 'shows each astronauts total time in space' do
         visit '/astronauts'
 
         within "div#astronaut_info" do

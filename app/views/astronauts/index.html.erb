@@ -9,12 +9,11 @@
     <p><strong>Total Time in Space: </strong><%= astronaut.total_time_in_space %> days</p>
     <p>
     <strong>Missions: </strong><% astronaut.sort_alpha.each do |mission| %>
-      '<%= mission.title %>'
+      '<%= mission %>'
     <% end %>
     </p>
     <br>
   <% end %>
   </ul>
 </div>
-
 <h3><%= "Average Age: #{@astro_avg_age.round(2)}" %></h3>

@@ -1,0 +1,6 @@
+<h2>Astronaut: <%= @astronaut.name %></h2>
+<p id="missions">
+<strong>Missions: </strong><% @missions.each do |mission| %>
+  '<%= mission %>'
+<% end %>
+</p>
