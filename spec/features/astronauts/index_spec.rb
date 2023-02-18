@@ -5,13 +5,17 @@ RSpec.describe 'Astronaut index page', type: :feature do
     describe 'when I visit /astronauts' do
       let!(:astronaut_1) { Astronaut.create!(name: 'Buzz Lightyear', age: 30, job: 'Space Ranger') }
       let!(:astronaut_2) { Astronaut.create!(name: 'Master Chief', age: 117, job: 'Spartan Super Soldier') }
+      let(:mission_1) { Mission.create!(title: 'Capricorn 2', time_in_space: 99) }
+      let(:mission_2) { Mission.create!(title: 'Apollo 13', time_in_space: 126) }
+      let(:mission_3) { Mission.create!(title: 'Pisces 26', time_in_space: 130) }
+      let(:mission_4) { Mission.create!(title: 'Aeries 9', time_in_space: 85) }
 
-      # before do
-      #   mission_1 = astronaut_1.missions.create!(title: 'Apollo 13', time_in_space: 126)
-      #   mission_2 = astronaut_1.missions.create!(title: 'Capricorn 2', time_in_space: 99)
-      #   mission_3 = astronaut_2.missions.create!(title: 'Pisces 26', time_in_space: 130)
-      #   mission_4 = astronaut_2.missions.create!(title: 'Aeries 9', time_in_space: 85)
-      # end
+      before do
+          AstronautMission.create!(astronaut: astronaut_1, mission: mission_1)
+          AstronautMission.create!(astronaut: astronaut_1, mission: mission_2)
+          AstronautMission.create!(astronaut: astronaut_2, mission: mission_3)
+          AstronautMission.create!(astronaut: astronaut_2, mission: mission_4)
+      end
 
       it 'I see a list of astronauts and their attribures' do
         visit '/astronauts'
@@ -36,17 +40,21 @@ RSpec.describe 'Astronaut index page', type: :feature do
       end
 
       it 'shows a list of all of an astronauts mission names in alphabetical order' do
-        mission_1 = astronaut_1.missions.create!(title: 'Capricorn 2', time_in_space: 99)
-        mission_2 = astronaut_1.missions.create!(title: 'Apollo 13', time_in_space: 126)
-        mission_3 = astronaut_2.missions.create!(title: 'Pisces 26', time_in_space: 130)
-        mission_4 = astronaut_2.missions.create!(title: 'Aeries 9', time_in_space: 85)
-
         visit '/astronauts'
 
         within "div#astronaut_info" do
-          save_and_open_page
+          
           expect(page).to have_content("Missions: '#{mission_2.title}' '#{mission_1.title}'")
           expect(page).to have_content("Missions: '#{mission_4.title}' '#{mission_3.title}'")
+        end
+      end
+
+      it 'shows a list of all of an astronauts mission names in alphabetical order' do
+        visit '/astronauts'
+
+        within "div#astronaut_info" do
+          expect(page).to have_content("Total Time in Space: #{astronaut_1.total_time_in_space}")
+          expect(page).to have_content("Total Time in Space: #{astronaut_2.total_time_in_space}")
         end
       end
     end
