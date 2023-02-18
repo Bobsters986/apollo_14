@@ -1,6 +1,6 @@
 <h2>All Astronauts</h2>
 
-<div id="astronat_info">
+<div id="astronaut_info">
   <ul>
   <% @astronauts.each do |astronaut| %>
     <h3>Name: <%= astronaut.name %></h3>
@@ -10,3 +10,5 @@
   <% end %>
   </ul>
 </div>
+
+<%= "Average Age: #{@astro_avg_age.round(2)}" %>
