@@ -4,11 +4,16 @@
   <ul>
   <% @astronauts.each do |astronaut| %>
     <h3>Name: <%= astronaut.name %></h3>
-    <p>Age: <%= astronaut.age %></p>
-    <p>Job: <%= astronaut.job %></p>
+    <p><strong>Age: </strong><%= astronaut.age %></p>
+    <p><strong>Job: </strong><%= astronaut.job %></p>
+    <p>
+    <strong>Missions: </strong><% astronaut.sort_alpha.each do |mission| %>
+      '<%= mission.title %>'
+    <% end %>
+    </p>
     <br>
   <% end %>
   </ul>
 </div>
 
-<%= "Average Age: #{@astro_avg_age.round(2)}" %>
+<h3><%= "Average Age: #{@astro_avg_age.round(2)}" %></h3>
