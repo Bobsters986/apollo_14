@@ -8,7 +8,6 @@ RSpec.describe 'Astronaut index page', type: :feature do
 
       it 'I see a list of astronauts and their attribures' do
         visit '/astronauts'
-        save_and_open_page
 
         expect(page).to have_content("All Astronauts")
         within "div#astronaut_info" do
@@ -26,7 +25,6 @@ RSpec.describe 'Astronaut index page', type: :feature do
 
         visit '/astronauts'
         save_and_open_page
-
         expect(page).to have_content("Average Age: 62.33")
       end
     end
