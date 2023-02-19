@@ -26,6 +26,25 @@ RSpec.describe 'Astronaut show page', type: :feature do
           expect(page).to have_content("Missions: '#{mission_2.title}' '#{mission_1.title}'")
         end
       end
+
+      it 'I see a form to add a mission' do
+        mission_5 = Mission.create!(title: 'Libra 18', time_in_space: 100)
+
+        visit "/astronauts/#{astronaut_2.id}"
+
+        expect(page).to have_content("Missions: '#{mission_4.title}' '#{mission_3.title}'")
+
+        within "section#new_mission" do
+          expect(page).to have_field(:mission_id)
+          expect(page).to have_button(:Submit)
+        end
+
+        fill_in :mission_id, with: mission_5.id
+        click_button :Submit
+save_and_open_page
+        expect(current_path).to eq("/astronauts/#{astronaut_2.id}")
+        expect(page).to have_content("Missions: '#{mission_4.title}' '#{mission_5.title}' '#{mission_3.title}'")
+      end
     end
   end
 end

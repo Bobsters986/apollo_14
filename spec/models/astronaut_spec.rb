@@ -39,8 +39,8 @@ describe Astronaut, type: :model do
 
   describe '.instance_methods' do
     it 'can sort an astronauts missions alphabetically' do
-      expect(astronaut_1.sort_alpha).to eq([@mission_3, @mission_1, @mission_2])
-      expect(astronaut_2.sort_alpha).to eq([@mission_5, @mission_6, @mission_4])
+      expect(astronaut_1.sort_alpha).to eq([@mission_3.title, @mission_1.title, @mission_2.title])
+      expect(astronaut_2.sort_alpha).to eq([@mission_5.title, @mission_6.title, @mission_4.title])
     end
 
     it 'can show an astronauts total time in space' do
