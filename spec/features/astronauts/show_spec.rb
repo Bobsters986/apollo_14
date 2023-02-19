@@ -27,7 +27,7 @@ RSpec.describe 'Astronaut show page', type: :feature do
         end
       end
 
-      it 'I see a form to add a mission' do
+      it 'I see a form to add a mission. Once submitted I am redirected to the astronauts show page where the new mission is listed' do
         mission_5 = Mission.create!(title: 'Libra 18', time_in_space: 100)
 
         visit "/astronauts/#{astronaut_2.id}"
